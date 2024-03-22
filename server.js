@@ -2,22 +2,23 @@
 const express = require("express")
 require("dotenv").config()
 const req = require("express/lib/request")
-
+const path = require('path');
 const multer = require("multer")
-const app = express()
-app.use(express.urlencoded({ extended: true}))
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const Files = require("./models/File")
 
 const upload = multer({dest : "uploads"})
-// let storage = multer.diskStorage {
 
-// }
+const app = express()
+app.use(express.urlencoded({ extended: true}))
+app.set('views',path.join(__dirname,'views'))
+app.set("view engine", "ejs")
+app.use(express.static(path.join(__dirname, 'public')));
 
 mongoose.connect(process.env.DATABASE_URL)
 
-app.set("view engine", "ejs")
+
 
 app.get("/",(req, res) => {
     res.render("index")
@@ -41,7 +42,7 @@ app.route("/:id").get(HandleDownload).post(HandleDownload)
 
 async function HandleDownload (req,res) {
     const f = await Files.findById(req.params.id)
-    f.downloadCount++;
+    f.downloadCount++
     await f.save()
     console.log(f)
     res.download(f.path, f.orginalname)
