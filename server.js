@@ -37,7 +37,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     
 })
 
-app.route("/:id").post(HandleDownload)
+app.route("/:id").get(HandleDownload).post(HandleDownload)
 
 async function HandleDownload (req,res) {
     const f = await Files.findById(req.params.id)
