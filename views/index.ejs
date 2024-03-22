@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FT App</title>
+    <style href></style>
+</head>
+<body>
+    <% if (locals.fileLink) { %>
+     <div class= "download" style="margin: 1rem; display: grid; gap: .5rem; max-width: 500px;grid-template-columns: auto 1fr">
+        <a> Your file is uploaded!</a>
+        <a href="<%= locals.fileLink  %>"><%= locals.fileLink %></a>
+     </div>
+    <% } else {%> 
+    <div class="upload">
+        <form action = "/upload" method="post" enctype="multipart/form-data" style = "display: grid; gap: .5rem; grid-template-columns: auto 1fr; max-width: 500px; margin: 0 auto ;">
+            <label for="file">File:</label>
+            <input type="file" id ="file" name = "file" required/>
+            <!-- <label for="password">Password</label>
+            <input type="password" name="password" id="password" /> -->
+            <button style = "grid-column: span 2;" type="submit">Upload</button>
+        </form>
+    </div>
+    <% } %>
+</body>
+</html>
