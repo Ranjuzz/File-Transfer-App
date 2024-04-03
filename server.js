@@ -4,6 +4,7 @@ const path = require('path');
 const multer = require("multer");
 const mongoose = require("mongoose");
 const Files = require("./models/File");
+// const fs = require("fs")
 
 const upload = multer({ dest: "uploads" });
 
@@ -26,10 +27,9 @@ app.get("/", (req, res) => {
 app.post("/upload", upload.single("file"), async (req, res) => {
     const fileData = {
         path: req.file.path,
-        originalname: req.file.originalname
+        originalname: req.file.originalname,
     };
     console.log(req.file);
-
     const file = await Files.create(fileData);
     res.render("index", { fileLink: `${process.env.APP_BASE_URL}/${file.id}` });
 });
