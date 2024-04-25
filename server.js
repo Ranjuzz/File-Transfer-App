@@ -9,16 +9,16 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 // Load environment variables
 config();
-
-const upload = multer({ dest: path.join(__dirname, "uploads") });
+// console.log(path.dirname)
+const upload = multer({ dest: './uploads' });
 
 const app = express();
 
 // Middleware setup
 app.use(express.urlencoded({ extended: true }));
-app.set('views', path.join(__dirname, 'views'));
+app.set('views',  './views');
 app.set("view engine", "ejs");
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('./public'));
 
 // Database Connection
 connect(process.env.DATABASE_URL)

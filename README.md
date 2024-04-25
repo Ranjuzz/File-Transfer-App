@@ -32,7 +32,7 @@ git clone https://github.com/your-username/your-repository.git
 ### Install dependencies:
 ```
 cd your-repository
-npm install
+npm i ejs multer nodemon
 ```
 
 ### Set up environment variables:
